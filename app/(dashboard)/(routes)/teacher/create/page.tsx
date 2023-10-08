@@ -45,6 +45,8 @@ const CreateCourses = () => {
         body: JSON.stringify(values),
       });
 
+      const data = await res.json();
+
       if (res.ok) {
         router.push(`/teacher/courses/${data.id}`);
         toast.success("Course created");

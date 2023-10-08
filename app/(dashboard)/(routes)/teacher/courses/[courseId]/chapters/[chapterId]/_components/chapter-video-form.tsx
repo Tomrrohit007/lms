@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import { Chapter, MuxData } from "@prisma/client";
 import { FileUpload } from "@/components/file-upload";
 
+import MuxPlayer from "@mux/mux-player-react";
+
 interface ChapterVideoFormProps {
   initialData: Chapter & { muxData?: MuxData | null };
   courseId: string;
@@ -32,13 +34,16 @@ export const ChapterVideoForm = ({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const res = await fetch(`/api/chapters/${chapterId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const res = await fetch(
+        `/api/courses/${courseId}/chapters/${chapterId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
 
       if (res.ok) {
         toast.success("Chapter updated");
@@ -75,7 +80,9 @@ export const ChapterVideoForm = ({
             <Video className='h-10 w-10 text-slate-500' />
           </div>
         ) : (
-          <div className='relative aspect-video mt-2'>Video Uploaded!</div>
+          <div className='relative aspect-video mt-2'>
+            <MuxPlayer playbackId={initialData?.muxData?.playbackId || ""} />
+          </div>
         ))}
       {isEditing && (
         <div>
