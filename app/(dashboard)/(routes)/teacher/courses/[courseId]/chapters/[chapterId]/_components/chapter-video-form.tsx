@@ -46,6 +46,7 @@ export const ChapterVideoForm = ({
       );
 
       if (res.ok) {
+        await res.json();
         toast.success("Chapter updated");
         toggleEdit();
         router.refresh();
@@ -101,8 +102,8 @@ export const ChapterVideoForm = ({
       )}
       {initialData.videoUrl && !isEditing && (
         <div>
-          VIdeos can take a few minutes to process. Refresh the page if video
-          doesn'r appear
+          Videos can take a few minutes to process. Refresh the page if video
+          doesn&apos;t appear
         </div>
       )}
     </div>

@@ -63,8 +63,6 @@ export const ChapterActions = ({
           }
         );
 
-        console.log(res);
-
         if (res.ok) {
           await res.json();
           toast.success("Chapter unpublished");
@@ -80,11 +78,9 @@ export const ChapterActions = ({
           }
         );
 
-        console.log(res);
-
         if (res.ok) {
           await res.json();
-          toast.success("Chapter unpublished");
+          toast.success("Chapter published");
         }
       }
       router.refresh();
