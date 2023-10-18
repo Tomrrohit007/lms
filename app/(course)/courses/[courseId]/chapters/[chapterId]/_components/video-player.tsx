@@ -36,12 +36,20 @@ export const VideoPlayer = ({
   const onEnd = async () => {
     try {
       if (completeOnEnd) {
-        await axios.put(
+        const res = await fetch(
           `/api/courses/${courseId}/chapters/${chapterId}/progress`,
           {
-            isCompleted: true,
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ isCompleted: true }),
           }
         );
+
+        if (res.ok) {
+          await res.json();
+        }
 
         if (!nextChapterId) {
           confetti.onOpen();
