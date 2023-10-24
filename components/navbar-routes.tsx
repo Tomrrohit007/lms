@@ -17,7 +17,7 @@ export const NavbarRoutes = () => {
   return (
     <>
       {isSearchPage && (
-        <div className='hidden md:block ml-auto w-full'>
+        <div className='hidden md:block ml-auto'>
           <SearchInput />
         </div>
       )}
